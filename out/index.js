@@ -28,6 +28,14 @@ function createServer(options) {
                 res.end(`Not found${extra ? ` - ${extra}` : ''}`);
             });
         }
+        function redirect(req, res, location) {
+            return __awaiter(this, void 0, void 0, function* () {
+                res.writeHead(302, 'Found', {
+                    'Location': location
+                });
+                res.end(`Location: ${location}`);
+            });
+        }
         function serveFile(req, res, extname, content) {
             return __awaiter(this, void 0, void 0, function* () {
                 const headers = {
@@ -138,6 +146,10 @@ function createServer(options) {
                 const stats = yield fsSafeStat(requestedPath);
                 if (!stats || !stats.isDirectory()) {
                     return notFound(req, res, '4');
+                }
+                const expectedRequestPath = `/${path.relative(rootDir, requestedPath).replace(/\\/g, '/')}/`;
+                if (pathname !== expectedRequestPath) {
+                    return redirect(req, res, expectedRequestPath);
                 }
                 const indexPath = path.normalize(path.join(requestedPath, 'index.html'));
                 const indexContent = yield fsSafeRead(indexPath);

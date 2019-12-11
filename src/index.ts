@@ -29,6 +29,13 @@ export async function createServer(options: IServerOptions): Promise<IServer> {
 		res.end(`Not found${extra ? ` - ${extra}` : ''}`);
 	}
 
+	async function redirect(req: http.IncomingMessage, res: http.ServerResponse, location: string) {
+		res.writeHead(302, 'Found', {
+			'Location': location
+		});
+		res.end(`Location: ${location}`);
+	}
+
 	async function serveFile(req: http.IncomingMessage, res: http.ServerResponse, extname: string, content: Buffer) {
 		const headers: { [header: string]: any; } = {
 			'Content-Encoding': 'utf8'
@@ -132,6 +139,10 @@ export async function createServer(options: IServerOptions): Promise<IServer> {
 		const stats = await fsSafeStat(requestedPath);
 		if (!stats || !stats.isDirectory()) {
 			return notFound(req, res, '4');
+		}
+		const expectedRequestPath = `/${path.relative(rootDir, requestedPath).replace(/\\/g, '/')}/`;
+		if (pathname !== expectedRequestPath) {
+			return redirect(req, res, expectedRequestPath);
 		}
 		const indexPath = path.normalize(path.join(requestedPath, 'index.html'));
 		const indexContent = await fsSafeRead(indexPath);
