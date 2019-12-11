@@ -140,7 +140,10 @@ export async function createServer(options: IServerOptions): Promise<IServer> {
 		if (!stats || !stats.isDirectory()) {
 			return notFound(req, res, '4');
 		}
-		const expectedRequestPath = `/${path.relative(rootDir, requestedPath).replace(/\\/g, '/')}/`;
+		let expectedRequestPath = `${path.relative(rootDir, requestedPath).replace(/\\/g, '/')}/`;
+		if (expectedRequestPath.charAt(0) !== '/') {
+			expectedRequestPath = `/${expectedRequestPath}`;
+		}
 		if (pathname !== expectedRequestPath) {
 			return redirect(req, res, expectedRequestPath);
 		}
