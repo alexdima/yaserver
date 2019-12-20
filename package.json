@@ -15,6 +15,9 @@
     "http",
     "server"
   ],
+  "bin": {
+    "yaserver": "./bin/yaserver"
+  },
   "author": "Alexandru Dima",
   "license": "MIT",
   "bugs": {

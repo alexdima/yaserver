@@ -69,13 +69,6 @@ export async function createServer(options: IServerOptions): Promise<IServer> {
 		headers['Content-Length'] = content.byteLength;
 		res.writeHead(200, 'OK', headers);
 		res.end(content);
-
-		// 		// var data = "do shash'owania";
-		// 		// response.writeHead(200, 'OK');
-		// 		// response.end(requestedPath);
-		// console.log(`here i am`);
-		// console.log(entries);
-		// return notFound(req, res);
 	}
 
 	async function serveDir(req: http.IncomingMessage, res: http.ServerResponse, dirPath: string, entries: fs.Dirent[]) {
@@ -214,10 +207,3 @@ function fsSafeReadDir(path: string): Promise<fs.Dirent[] | null> {
 }
 
 //#endregion
-
-// createServer({ rootDir: 'C:\\Alex\\src' }).then((yaserver) => {
-// 	const server = http.createServer((request, response) => {
-// 		yaserver.handle(request, response);
-// 	});
-// 	server.listen(8000);
-// });

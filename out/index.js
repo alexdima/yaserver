@@ -76,12 +76,6 @@ function createServer(options) {
                 headers['Content-Length'] = content.byteLength;
                 res.writeHead(200, 'OK', headers);
                 res.end(content);
-                // 		// var data = "do shash'owania";
-                // 		// response.writeHead(200, 'OK');
-                // 		// response.end(requestedPath);
-                // console.log(`here i am`);
-                // console.log(entries);
-                // return notFound(req, res);
             });
         }
         function serveDir(req, res, dirPath, entries) {
@@ -218,9 +212,3 @@ function fsSafeReadDir(path) {
     });
 }
 //#endregion
-// createServer({ rootDir: 'C:\\Alex\\src' }).then((yaserver) => {
-// 	const server = http.createServer((request, response) => {
-// 		yaserver.handle(request, response);
-// 	});
-// 	server.listen(8000);
-// });
