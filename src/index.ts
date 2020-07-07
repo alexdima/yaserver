@@ -43,10 +43,12 @@ export async function createServer(options: IServerOptions): Promise<IServer> {
 
 		switch (extname) {
 			case '.html': headers['Content-Type'] = 'text/html'; break;
+			case '.htm': headers['Content-Type'] = 'text/html'; break;
 			case '.js': headers['Content-Type'] = 'text/javascript'; break;
 			case '.css': headers['Content-Type'] = 'text/css'; break;
 			case '.ttf': headers['Content-Type'] = 'font/ttf'; break;
 			case '.svg': headers['Content-Type'] = 'image/svg+xml'; break;
+			case '.wasm': headers['Content-Type'] = 'application/wasm'; break;
 			case '.map': break;
 			default:
 				console.log(`Unhandled mime-type for ext name: ${extname}`);

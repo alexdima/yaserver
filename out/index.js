@@ -45,6 +45,9 @@ function createServer(options) {
                     case '.html':
                         headers['Content-Type'] = 'text/html';
                         break;
+                    case '.htm':
+                        headers['Content-Type'] = 'text/html';
+                        break;
                     case '.js':
                         headers['Content-Type'] = 'text/javascript';
                         break;
@@ -56,6 +59,9 @@ function createServer(options) {
                         break;
                     case '.svg':
                         headers['Content-Type'] = 'image/svg+xml';
+                        break;
+                    case '.wasm':
+                        headers['Content-Type'] = 'application/wasm';
                         break;
                     case '.map': break;
                     default:
