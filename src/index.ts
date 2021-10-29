@@ -37,17 +37,18 @@ export async function createServer(options: IServerOptions): Promise<IServer> {
 	}
 
 	async function serveFile(req: http.IncomingMessage, res: http.ServerResponse, extname: string, content: Buffer) {
-		const headers: { [header: string]: any; } = {
-			'Content-Encoding': 'utf8'
-		};
+		const headers: { [header: string]: any; } = {};
 
 		switch (extname) {
-			case '.html': headers['Content-Type'] = 'text/html'; break;
-			case '.htm': headers['Content-Type'] = 'text/html'; break;
-			case '.js': headers['Content-Type'] = 'text/javascript'; break;
-			case '.css': headers['Content-Type'] = 'text/css'; break;
-			case '.ttf': headers['Content-Type'] = 'font/ttf'; break;
+			case '.css': headers['Content-Type'] = 'text/css; charset=utf-8'; break;
+			case '.htm': headers['Content-Type'] = 'text/html; charset=utf-8'; break;
+			case '.html': headers['Content-Type'] = 'text/html; charset=utf-8'; break;
+			case '.js': headers['Content-Type'] = 'text/javascript; charset=utf-8'; break;
+			case '.json': headers['Content-Type'] = 'application/json; charset=utf-8'; break;
+			case '.png': headers['Content-Type'] = 'image/png'; break;
 			case '.svg': headers['Content-Type'] = 'image/svg+xml'; break;
+			case '.ttf': headers['Content-Type'] = 'font/ttf'; break;
+			case '.txt': headers['Content-Type'] = 'text/plain; charset=utf-8'; break;
 			case '.wasm': headers['Content-Type'] = 'application/wasm'; break;
 			case '.map': break;
 			default:

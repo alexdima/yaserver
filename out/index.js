@@ -38,27 +38,34 @@ function createServer(options) {
         }
         function serveFile(req, res, extname, content) {
             return __awaiter(this, void 0, void 0, function* () {
-                const headers = {
-                    'Content-Encoding': 'utf8'
-                };
+                const headers = {};
                 switch (extname) {
-                    case '.html':
-                        headers['Content-Type'] = 'text/html';
+                    case '.css':
+                        headers['Content-Type'] = 'text/css; charset=utf-8';
                         break;
                     case '.htm':
-                        headers['Content-Type'] = 'text/html';
+                        headers['Content-Type'] = 'text/html; charset=utf-8';
+                        break;
+                    case '.html':
+                        headers['Content-Type'] = 'text/html; charset=utf-8';
                         break;
                     case '.js':
-                        headers['Content-Type'] = 'text/javascript';
+                        headers['Content-Type'] = 'text/javascript; charset=utf-8';
                         break;
-                    case '.css':
-                        headers['Content-Type'] = 'text/css';
+                    case '.json':
+                        headers['Content-Type'] = 'application/json; charset=utf-8';
+                        break;
+                    case '.png':
+                        headers['Content-Type'] = 'image/png';
+                        break;
+                    case '.svg':
+                        headers['Content-Type'] = 'image/svg+xml';
                         break;
                     case '.ttf':
                         headers['Content-Type'] = 'font/ttf';
                         break;
-                    case '.svg':
-                        headers['Content-Type'] = 'image/svg+xml';
+                    case '.txt':
+                        headers['Content-Type'] = 'text/plain; charset=utf-8';
                         break;
                     case '.wasm':
                         headers['Content-Type'] = 'application/wasm';
